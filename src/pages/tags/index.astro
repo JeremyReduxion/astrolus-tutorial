@@ -1,0 +1,13 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Tags from "../../components/Tags.astro";
+
+const allPosts = await getCollection("blog");
+const uniqueTags = [...new Set(allPosts.filter((post: any) => post.data.tags).map((post: any) => post.data.tags).flat())];
+const pageTitle = "Tags";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+    <Tags tags={uniqueTags} />
+</BaseLayout>
